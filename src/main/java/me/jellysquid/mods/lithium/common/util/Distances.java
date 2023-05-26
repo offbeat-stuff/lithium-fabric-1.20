@@ -6,8 +6,8 @@ import net.minecraft.world.chunk.ChunkSection;
 public class Distances {
 
     public static double getMinChunkToBlockDistanceL2Sq(BlockPos origin, int chunkX, int chunkZ) {
-        int chunkMinX = ChunkSection.blockCoordFromChunkCoord(chunkX);
-        int chunkMinZ = ChunkSection.blockCoordFromChunkCoord(chunkZ);
+        int chunkMinX = chunkX * 16;
+        int chunkMinZ = chunkZ * 16;
 
         int xDistance = origin.getX() - chunkMinX;
         if (xDistance > 0) {

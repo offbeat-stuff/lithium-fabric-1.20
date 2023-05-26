@@ -13,8 +13,8 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(ItemStack.class)
 public abstract class ItemStackMixin {
     //Optimization: As ItemStack already caches whether it is empty, we only have to actually use the cached value.
-    @Shadow
-    private boolean empty;
+    // @Shadow
+    // private boolean empty;
     @Shadow
     private int count;
     @Shadow
@@ -25,13 +25,13 @@ public abstract class ItemStackMixin {
      * @author 2No2Name
      * @reason use cached empty state
      */
-    @Overwrite
-    public boolean isEmpty() {
-        return this.empty;
-    }
+    // @Overwrite
+    // public boolean isEmpty() {
+    //     return this.empty;
+    // }
 
-    @Redirect(method = "updateEmptyState()V", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;isEmpty()Z"))
-    private boolean isEmptyRecalculate(ItemStack itemStack) {
-        return (this.item == null || this.item == Items.AIR || this.count <= 0);
-    }
+    // @Redirect(method = "updateEmptyState()V", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;isEmpty()Z"))
+    // private boolean isEmptyRecalculate(ItemStack itemStack) {
+    //     return (this.item == null || this.item == Items.AIR || this.count <= 0);
+    // }
 }

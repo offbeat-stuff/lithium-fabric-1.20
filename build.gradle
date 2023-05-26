@@ -1,7 +1,7 @@
 import net.fabricmc.loom.task.RemapJarTask
 
 plugins {
-    id 'fabric-loom' version '1.0-SNAPSHOT'
+    id 'fabric-loom' version '1.2-SNAPSHOT'
     id 'maven-publish'
     id 'net.caffeinemc.mixin-config-plugin' version '1.0-SNAPSHOT'
 }
@@ -131,20 +131,20 @@ tasks.withType(Jar) {
     from sourceSets.api.output
 }
 
-task apiJar(type: Jar) {
-    classifier "api-dev"
+// task apiJar(type: Jar) {
+//     classifier "api-dev"
 
-    from sourceSets.api.output
-}
+//     from sourceSets.api.output
+// }
 
-task remapApiJar(type: RemapJarTask) {
-    classifier "api"
+// task remapApiJar(type: RemapJarTask) {
+//     classifier "api"
 
-    input = apiJar.archiveFile.get().asFile
-    addNestedDependencies = false
-}
+//     input = apiJar.archiveFile.get().asFile
+//     addNestedDependencies = false
+// }
 
-prepareRemapApiJar.dependsOn(apiJar)
+// prepareRemapApiJar.dependsOn(apiJar)
 
 publishing {
     publications {
@@ -153,10 +153,10 @@ publishing {
             artifact(remapJar)
         }
 
-        api (MavenPublication) {
-            artifactId "lithium-api"
-            artifact(remapApiJar)
-        }
+        // api (MavenPublication) {
+        //     artifactId "lithium-api"
+        //     artifact(remapApiJar)
+        // }
     }
 }
-build.dependsOn remapApiJar
+// build.dependsOn remapApiJar

@@ -14,6 +14,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
+import net.minecraft.server.world.ChunkLevelType;
 
 @Mixin(targets = "net.minecraft.world.chunk.WorldChunk$DirectBlockEntityTickInvoker")
 public abstract class DirectBlockEntityTickInvokerMixin implements WorldBorderListenerOnce {
@@ -38,7 +39,7 @@ public abstract class DirectBlockEntityTickInvokerMixin implements WorldBorderLi
         if (this.isInsideWorldBorder()) {
             World world = this.worldChunk.getWorld();
             if (world instanceof ServerWorld serverWorld) {
-                return this.worldChunk.getLevelType().isAfter(ChunkHolder.LevelType.TICKING) && serverWorld.isChunkLoaded(ChunkPos.toLong(pos));
+                return this.worldChunk.getLevelType().isAfter(ChunkLevelType.BLOCK_TICKING) && serverWorld.isChunkLoaded(ChunkPos.toLong(pos));
             }
             return true;
         } else {
